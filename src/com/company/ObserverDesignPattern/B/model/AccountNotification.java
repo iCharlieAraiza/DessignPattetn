@@ -10,7 +10,7 @@ public class AccountNotification implements Observer {
         this.topic = (MessageInbox) topic;
     }
 
-    @Override
+
     public void update() {
         if(topic.read)
             System.out.println("No hay ningún mensaje nuevo");
@@ -18,6 +18,11 @@ public class AccountNotification implements Observer {
             System.out.println("Nuevo mensaje: "+ topic.getUpdate(this));
             topic.read = true;
         }
+    }
+
+    @Override
+    public void update(Subject subject) {
+
     }
 
     @Override

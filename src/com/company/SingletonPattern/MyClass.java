@@ -4,8 +4,6 @@ public class MyClass {
     private static MyClass uniqueInstance = new MyClass();
     private String name;
 
-
-
     public void setName(String name){
         this.name = name;
     }

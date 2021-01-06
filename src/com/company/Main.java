@@ -1,10 +1,20 @@
 package com.company;
 
+import com.company.DecoratorDesignPattern.A.interfaces.IceCream;
+import com.company.DecoratorDesignPattern.A.model.BasicIceCream;
+import com.company.DecoratorDesignPattern.A.model.ChocolateIceCream;
+import com.company.DecoratorDesignPattern.A.model.MintIceCream;
+import com.company.DecoratorDesignPattern.A.model.VanillaIceCream;
+import com.company.FactoryDesignPattern.A.interfaces.Store;
+import com.company.FactoryDesignPattern.A.model.MidStore;
+import com.company.FactoryDesignPattern.A.model.RegularStore;
 import com.company.ObserverDesignPattern.A.interfaces.Observer;
 import com.company.ObserverDesignPattern.A.model.EmailTopic;
 import com.company.ObserverDesignPattern.A.model.EmailTopicSubscriber;
 import com.company.ObserverDesignPattern.B.model.AccountNotification;
 import com.company.ObserverDesignPattern.B.model.MessageInbox;
+import com.company.ObserverDesignPattern.C.model.Radio;
+import com.company.ObserverDesignPattern.C.model.Station;
 import com.company.SingletonPattern.MyClass;
 import com.company.StrategyDesignPattern.A.controller.CalculatorController;
 import com.company.StrategyDesignPattern.A.model.Circle;
@@ -20,16 +30,13 @@ import com.company.PrototypeDesignPattern.B.Elephant;
 public class Main {
 
     public static void main(String[] args) {
-        //strategyDesignPatternA();
-        Elephant elefante1 = new Elephant("Dumbo", 1000);
-        System.out.println(elefante1.getName());
+    //strategyDesignPatternA();
+        Store locoPizza = new RegularStore();
+        Store pizzaExpress = new MidStore();
 
-        Elephant clonElefante1 = (Elephant) elefante1.clone();
-        System.out.println("Clon del elefante 1: "+ clonElefante1.getName());
-
-        clonElefante1.setName("Stampy");
-        System.out.println(clonElefante1.getName());
-
+        locoPizza.ordePizza("pepperoni");
+        pizzaExpress.ordePizza("pepperoni");
+        pizzaExpress.ordePizza("piña");
     }
 
 
@@ -126,4 +133,42 @@ public class Main {
         System.out.println("Clon de persona 1: " + clonPersona1.getName());
     }
 
+    public static void PrototypeDesignPAttern(){
+        Elephant elefante1 = new Elephant("Dumbo", 1000);
+        System.out.println(elefante1.getName());
+
+        Elephant clonElefante1 = (Elephant) elefante1.clone();
+        System.out.println("Clon del elefante 1: "+ clonElefante1.getName());
+
+        clonElefante1.setName("Stampy");
+        System.out.println(clonElefante1.getName());
+    }
+
+    public static void ObserverDesignPatternC(){
+        Station estacion = new Station();
+
+        for(int i = 0; i < 5; i++){
+            estacion.add(new Radio(estacion));
+        }
+
+        estacion.changeSong("Toys");
+        estacion.changeSong("American Idiot");
+
+    }
+
+    public static void decoratorDesignPattern(){
+        IceCream basicIceCream = new BasicIceCream();
+        System.out.println("Basic Ice-cream cost $" + basicIceCream.cost());
+
+        //Add Vanilla to the order
+
+        IceCream vanilla = new VanillaIceCream(basicIceCream); // wrapping vanilla
+        System.out.println("Adding Vanilla - cost is: $" + vanilla.cost());
+
+
+        //Add Mint to the order
+        IceCream mint = new MintIceCream(vanilla);
+        System.out.println("Adding Mint - cost is: $" + mint.cost());
+
+    }
 }

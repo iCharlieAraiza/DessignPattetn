@@ -27,7 +27,7 @@ public class MessageInbox implements Subject {
     @Override
     public void notifyObserver() {
         read = false;
-        observer.update();
+        observer.update(this);
     }
 
     @Override
