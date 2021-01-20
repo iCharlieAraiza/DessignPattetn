@@ -1,6 +1,7 @@
 package com.company.PrototypeDesignPattern.B;
 
 import com.company.PrototypeDesignPattern.Animal;
+import com.sun.xml.internal.xsom.impl.AnnotationImpl;
 
 public class Elephant implements Animal {
 

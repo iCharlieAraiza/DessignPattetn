@@ -2,12 +2,13 @@ package com.company;
 
 import com.company.DecoratorDesignPattern.A.interfaces.IceCream;
 import com.company.DecoratorDesignPattern.A.model.BasicIceCream;
-import com.company.DecoratorDesignPattern.A.model.ChocolateIceCream;
 import com.company.DecoratorDesignPattern.A.model.MintIceCream;
 import com.company.DecoratorDesignPattern.A.model.VanillaIceCream;
 import com.company.FactoryDesignPattern.A.interfaces.Store;
 import com.company.FactoryDesignPattern.A.model.MidStore;
 import com.company.FactoryDesignPattern.A.model.RegularStore;
+import com.company.IteratorDesignPattern.GeekStoreCatalog;
+import com.company.IteratorDesignPattern.interfaces.Seller;
 import com.company.ObserverDesignPattern.A.interfaces.Observer;
 import com.company.ObserverDesignPattern.A.model.EmailTopic;
 import com.company.ObserverDesignPattern.A.model.EmailTopicSubscriber;
@@ -16,6 +17,7 @@ import com.company.ObserverDesignPattern.B.model.MessageInbox;
 import com.company.ObserverDesignPattern.C.model.Radio;
 import com.company.ObserverDesignPattern.C.model.Station;
 import com.company.SingletonPattern.MyClass;
+import com.company.StateDesignPattern.A.Dashboard;
 import com.company.StrategyDesignPattern.A.controller.CalculatorController;
 import com.company.StrategyDesignPattern.A.model.Circle;
 import com.company.StrategyDesignPattern.A.model.Square;
@@ -31,12 +33,8 @@ public class Main {
 
     public static void main(String[] args) {
     //strategyDesignPatternA();
-        Store locoPizza = new RegularStore();
-        Store pizzaExpress = new MidStore();
+        decoratorDesignPattern();
 
-        locoPizza.ordePizza("pepperoni");
-        pizzaExpress.ordePizza("pepperoni");
-        pizzaExpress.ordePizza("piña");
     }
 
 
@@ -171,4 +169,44 @@ public class Main {
         System.out.println("Adding Mint - cost is: $" + mint.cost());
 
     }
+
+    public static void factoryDesignPattern(){
+        Store locoPizza = new RegularStore();
+        Store pizzaExpress = new MidStore();
+
+        locoPizza.ordePizza("pepperoni");
+        pizzaExpress.ordePizza("pepperoni");
+        pizzaExpress.ordePizza("piña");
+    }
+
+    public static void iteratorDesignPatternA(){
+        GeekStoreCatalog geekCatalog = new GeekStoreCatalog();
+        geekCatalog.addProduct(new com.company.IteratorDesignPattern.Product(123, "plyera"));
+        geekCatalog.addProduct(new com.company.IteratorDesignPattern.Product(456, "pin"));
+        geekCatalog.addProduct(new com.company.IteratorDesignPattern.Product(567,"cuadernos"));
+        geekCatalog.addProduct(new com.company.IteratorDesignPattern.Product(523, "Lápices"));
+
+        Seller pointStation = new Seller(geekCatalog);
+
+        pointStation.printCatalog();
+
+        geekCatalog.addProduct(new com.company.IteratorDesignPattern.Product(999, "tazas"));
+        pointStation.printCatalog();
+    }
+
+    public static void stateDesignPatternA(){
+        Dashboard dashboard = new Dashboard();
+
+        dashboard.showState();
+        dashboard.executeAlarm();
+
+        dashboard.setState(1);
+        dashboard.showState();
+        dashboard.executeAlarm();
+
+        dashboard.setState(3);
+        dashboard.showState();
+        dashboard.executeAlarm();
+    }
+
 }
